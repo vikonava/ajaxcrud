@@ -1,0 +1,31 @@
+<div id="error_explanation" style="display:none"></div>
+<%%= form_for(@<%= model_name %>, :remote => true) do |f| %><% 
+  attributes.each do |attribute| 
+    attribute = attribute.split(':')
+    type = "text_field"
+    if attribute[1].downcase == "text"
+      type = "text_area"
+    elsif attribute[1].downcase == "integer" || attribute[1].downcase == "float" || attribute[1].downcase == "decimal"
+      type = "number_field"
+    elsif attribute[1].downcase == "datetime"
+      type = "datetime_select"
+    elsif attribute[1].downcase == "time"
+      type = "time_select"
+    elsif attribute[1].downcase == "date"
+      type = "date_select"
+    elsif attribute[1].downcase == "boolean"
+      type = "check_box"
+    else
+      type = "text_field"
+    end
+%>
+  <p>
+    <%%= f.label :<%= attribute[0] %> %><br />
+    <%%= f.<%= type %> :<%= attribute[0] %> %> 
+  </p><%
+  end
+%> 
+  <p class="actions">
+    <%%= f.submit @action %>
+  </p>
+<%% end %>

@@ -1,0 +1,10 @@
+<%% if @<%= model_name %>.errors.any? %>
+  var x = "<h2><%%= pluralize(@<%= model_name %>.errors.count, "error") %> prohibited this user from being saved:</h2><ul><%% @<%= model_name %>.errors.full_messages.each do |msg| %><li><%%= msg %></li><%% end %></ul></div>"
+  $('#error_explanation').html(x).show();
+  $('#<%= plural_model %>_dialog').dialog('option','position','center');
+<%% else %>
+  $("#<%= plural_model %>_dialog").dialog('close');
+  $("#<%%= dom_id(@<%= model_name %>) %>").replaceWith("<%%= escape_javascript(render(:partial => @<%= model_name %>)) %>");
+  <%% @<%= model_name %> = <%= model_name.capitalize %>.new %>
+  $('#<%= plural_model %>_success').html('<%= model_name.capitalize %> was successfully updated.').slideToggle('slow').delay(1500).slideToggle('slow');
+<%% end %>

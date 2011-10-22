@@ -1,0 +1,9 @@
+<% 
+  attributes.each do |attribute| 
+    attribute = attribute.split(':')%>
+<p>
+  <strong><%= attribute[0] %>:</strong>
+  <%%= @<%= model_name %>.<%= attribute[0] %> %>
+</p><%
+  end
+%>

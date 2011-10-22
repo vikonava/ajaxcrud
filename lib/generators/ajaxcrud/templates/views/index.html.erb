@@ -1,0 +1,28 @@
+<%%= ajaxcrud_js('<%= model_name %>','New <%= model_name.capitalize %>','View <%= model_name.capitalize %>') %>
+<%%= ajaxcrud_notices('<%= model_name %>') %>
+
+<h1><%= model_name.capitalize %></h1>
+
+<p>
+  Search: <%%= ajaxcrud_search('<%= model_name %>') %>
+</p>
+<a href="<%%= ajaxcrud_new_link('<%= model_name %>') %>">New <%= model_name.capitalize %></a>
+<table id="<%= plural_model %>" class="index_table">
+  <thead>
+    <tr><% 
+  @search_attributes.each do |attribute| 
+    attribute = attribute.split(':') %>
+      <th><%= attribute[0].capitalize %></th><%
+  end
+%>  
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="<%= plural_model %>_data">
+    <%%= render @<%= plural_model %> %>
+  </tbody>
+</table>
+
+<br />
+
+<%%= ajaxcrud_dialogbox('<%= model_name %>') %>

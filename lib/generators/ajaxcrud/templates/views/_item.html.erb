@@ -1,0 +1,13 @@
+<tr id="<%%= dom_id(<%= model_name %>) %>"><% 
+  @search_attributes.each do |attribute| 
+    attribute = attribute.split(':') %>
+  <td><%%= <%= model_name %>.<%= attribute[0] %> %></td><%
+  end
+%> 
+  <td>
+    <%%= link_to 'Show', ajaxcrud_show_link(<%= model_name %>_path(<%= model_name %>)) %>
+    <%%= link_to 'Edit', edit_<%= model_name %>_path(<%= model_name %>), :remote => true %>
+    <%%= link_to 'Destroy', <%= model_name %>, :confirm => 'Are you sure?', :method => :delete, :remote => true %>
+  </td>
+</tr>
+

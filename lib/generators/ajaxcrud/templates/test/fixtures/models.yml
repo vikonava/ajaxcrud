@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:<% 
+  attributes.each do |attribute| 
+    attribute = attribute.split(':') 
+    attribute[1] = "MyString" if attribute[1].downcase == "tring"
+    attribute[1] = "My Text" if attribute[1].downcase == "text"
+    attribute[1] = "1" if attribute[1].downcase == "integer"
+    attribute[1] = "1.0" if attribute[1].downcase == "float"
+    attribute[1] = "true" if attribute[1].downcase == "boolean"%>
+  <%= attribute[0] %>: <%= attribute[1] %><%
+  end
+%>
+
+two:<% 
+  attributes.each do |attribute| 
+    attribute = attribute.split(':') 
+    attribute[1] = "MyString" if attribute[1].downcase == "tring"
+    attribute[1] = "My Text" if attribute[1].downcase == "text"
+    attribute[1] = "1" if attribute[1].downcase == "integer"
+    attribute[1] = "1.0" if attribute[1].downcase == "float"
+    attribute[1] = "true" if attribute[1].downcase == "boolean"%>
+  <%= attribute[0] %>: <%= attribute[1] %><%
+  end
+%>

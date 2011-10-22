@@ -1,0 +1,3 @@
+$("#form > form").replaceWith("<%%= escape_javascript(render(:partial => "form"))%>");
+$("#<%= plural_model %>_dialog").dialog("option", "title", "Edit <%= model_name.capitalize %>");
+$("#<%= plural_model %>_dialog").dialog('open');
