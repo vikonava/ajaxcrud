@@ -1,8 +1,36 @@
 Description:
-    Explain the generator
+    Creates a very nice ajax-based scaffold for a model.
 
 Example:
-    rails generate ajaxcrud Thing
+    rails g ajaxcrud NAME [field:type:boolean field:type:boolean]
+
+    NAME - is the name of the model that is going to be built
+
+    FIELD - the name of the attribute
+    TYPE - the type of the attribute (string, integer, date, float, text, etc)
+    BOOLEAN - true if it's going to be indexed in the search field (default = false)
+
+    Creating table Person with attributes name, address, website and phone number indexing only name and website on the search field:
+    
+    rails g ajaxcrud Person name:string:true address:text website:string:true phone_number:string
 
     This will create:
-        what/will/it/create
+        db/migrate/{timestamp}_create_{name}.rb
+	app/models/{name}.rb
+	test/unit/{name}_test.rb
+	test/fixtures/{name}.yml
+	app/views/{name}/create.js.erb
+	app/views/{name}/destroy.js.erb
+	app/views/{name}/edit.js.erb
+	app/views/{name}/_form.html.erb
+	app/views/{name}/index.html.erb
+	app/views/{name}/_{name}.html.erb
+	app/views/{name}/search.js.erb
+	app/views/{name}/show.html.erb
+	app/views/{name}/update.js.erb
+	app/controllers/{name}/create.js.erb
+	test/unit/helpers/{name}_helper_test.rb
+	app/helpers/{name}_helper.rb
+	app/helpers/ajaxcrud_helper.rb
+	app/assets/stylesheets/ajaxcrud.css.scss
+	app/assets/stylesheets/images/success.png

@@ -1,0 +1,80 @@
+{twitter.com/vikonava}[http://www.twitter.com/vikonava]
+
+= AjaxCRUD
+
+Gem for Rails that creates a convenient scaffold using Ajax in an unobtrusive way usign jQuery and jQueryUI.
+
+This gem has been tested working on Rails 3.
+
+== Requirements
+
+* jQuery
+* jQuery_ujs
+* jQueryUI (including stylesheet and images)
+
+== Setup
+
+Add the gem to your Gemfile then run +bundle+ to install it.
+
+  gem 'ajaxcrud'
+
+Install jQuery and jQueryUI(js and css) using assets on Rails 3.1 by adding the next line to app/assets/javascripts/application.js
+
+  # app/assets/javascripts/application.js
+  //= require jquery
+  //= require jquery_ujs
+  //= require jquery-ui
+
+And remember to also add the stylesheet and images included on jQueryUI to the app/assets/stylesheets/ folder.
+
+== Usage
+
+Theres only one command to run the generator and create a scaffold, and goes as follows:
+
+  rails g ajaxcrud NAME [field:type:boolean field:type:boolean]
+
+Where <tt>NAME</tt> is the name of the model you are going to create. Additional to that <tt>field</tt> is the name of the attribute you are going to add and <tt>type</tt> is the type of field, just as a regular scaffold. The extra <tt>boolean</tt> in there is to indicate if that attribute is going to be indexed in the search field, it can be <tt>true</tt>, <tt>false</tt> or <tt>blank</tt> being false as default.
+
+For example, if we are going to create a scaffold for <tt>Person</tt> which will include attributes <tt>name</tt>, <tt>address</tt>, <tt>website</tt> and <tt>phone_number</tt> being <tt>name</tt> and <tt>website</tt> the only attributes that are going to be indexed in the search field, we should run the following command:
+
+  rails g ajaxcrud Person name:string:true address:text website:string:true phone_number:string
+
+This will create the Ajax scaffold and additional to that a general stylesheet to give some default color to the index table, an ajaxcrud helper to make <tt>index.html.erb</tt> more self-explanatory.
+
+== Additional Configurations
+
+You can configurate the default table to show more attributes that the one's indexed, just edit the <tt>show.html.erb</tt> file.
+
+== Helpers 
+
+Helpers that are going to be added on <tt>index.html.erb</tt> are:
+
+* ajaxcrud_js(name, new_text, info_text)
+  post a javascript required code inside your index file. Where <tt>name</tt> is the name of your model which in our example is <tt>person</tt>, <tt>new_text</tt> would be the text to show in the dialog box when a user is going to be created and also <tt>info_text</tt> works in a similar way but for the show dialog. 
+
+* ajaxcrud_dialogbox(name)
+  is used to post the code that build the dialog boxes on the file. Where <tt>name</tt> is the name of your model which in our example is <tt>person</tt>.
+
+* ajaxcrud_notices(name)
+  is included in the place where notices will be shown in a <tt>flash[:notice]</tt> style but with some different finish. Where <tt>name</tt> is the name of your model which in our example is <tt>person</tt>.
+
+* ajaxcrud_search(name)
+  is the search field used to look for in the table records. Where <tt>name</tt> is the name of your model which in our example is <tt>person</tt>.
+
+* ajaxcrud_new_link(name)
+  creates the link to enable the New Record dialog. Where <tt>name</tt> is the name of your model which in our example is <tt>person</tt>.
+
+* ajaxcrud_show_link(path)
+  creates the link to render the <tt>show.html.erb</tt> file of the selected record inside a dialog. Where <tt>path</tt> is the original way to access the show file.
+
+== Known Bugs
+
+* When creating the same ajaxcrud twice the <tt>migration</tt> file is going to be created more than once.
+* If generator <tt>destroy</tt> is used everything is deleted (including the helper, <tt>ajaxcrud.css</tt>,...) of the model you indicate EXCEPT the migration file which needs to be removed manually.
+* When destroying a model the <tt>ajaxcrud.css</tt> and <tt>ajaxcrud_helper.rb</tt> are also deleted. Since they are being used for all the scaffolds generated you can add them manually and remember to add +include AjaxcrudHelper+ to your app/helpers/application_helper.rb file.
+
+== Special Thanks
+
+This gem was made based on some of the tutorial made by 'Nikunj' at the {Tech Journey}[http://codefundas.blogspot.com/2010/12/create-ajax-based-curd-using-rails-3.html]'s website and being adapted to change or add some functionalities to that.
+
+Also thanks to {Ryan Bates}[http://www.twitter.com/rbates] who helped me find out how to create my first generator and gem, and whose {website}[http://www.railscast.com] is awesome and has helped me a lot learning how to code in Ruby on Rails. Highly Recomended.
